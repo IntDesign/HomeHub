@@ -8,6 +8,12 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="com.intDesign.homeHub.presentation.ui.house.HouseFragment"
+        android:label="Houses"
+        tools:layout="@layout/fragment_house" />
+
+    <fragment
+        android:id="@+id/addHouse"
+        android:name="com.intDesign.homeHub.presentation.ui.house.AddHouseFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_house" />
 

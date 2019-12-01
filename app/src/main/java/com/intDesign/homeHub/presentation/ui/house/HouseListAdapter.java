@@ -17,23 +17,23 @@ import java.util.ArrayList;
 
 public class HouseListAdapter extends ArrayAdapter<House> {
 
-    public HouseListAdapter(Context context, ArrayList<House> users) {
-        super(context, R.layout.house_list_view_layout, users);
+    public HouseListAdapter(Context context, ArrayList<House> houses) {
+        super(context, R.layout.house_list_view_layout, houses);
     }
 
     @NotNull
     @Override
-    public View getView(int position, View convertView, @NotNull ViewGroup parent) {
+    public View getView(int position, View itemLayout, @NotNull ViewGroup parent) {
         House house = getItem(position);
 
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.house_list_view_layout, parent, false);
+        if (itemLayout == null) {
+            itemLayout = LayoutInflater.from(getContext()).inflate(R.layout.house_list_view_layout, parent, false);
         }
-        TextView houseLocation = convertView.findViewById(R.id.houseLocation);
-        TextView houseDescription = convertView.findViewById(R.id.houseDescription);
+        TextView houseLocation = itemLayout.findViewById(R.id.houseLocation);
+        TextView houseDescription = itemLayout.findViewById(R.id.houseDescription);
 
         houseLocation.setText(house.getHouseAddress());
         houseDescription.setText(String.format("%s / %s / %s ", house.getOwnerName(), house.getOwnerPhone(), house.getOwnerEmail()));
-        return convertView;
+        return itemLayout;
     }
 }

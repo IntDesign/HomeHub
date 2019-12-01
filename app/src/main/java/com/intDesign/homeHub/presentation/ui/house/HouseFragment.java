@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.intDesign.homeHub.R;
 import com.intDesign.homeHub.presentation.ui.house.tasks.HouseSearchRequest;
 
@@ -21,10 +22,22 @@ import java.util.ArrayList;
 public class HouseFragment extends Fragment {
     private ListView houseListView;
     private HouseListAdapter adapter;
+    private View root;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_house, container, false);
+        container.removeAllViews();
+        root = inflater.inflate(R.layout.fragment_house, container, false);
+        FloatingActionButton floatingActionButton = root.findViewById(R.id.addHouse);
+        floatingActionButton.setOnClickListener(v -> {
+            AddHouseFragment nextFrag = new AddHouseFragment();
+            container.removeAllViews();
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(container.getId(), nextFrag, "addHouseFragment")
+                    .addToBackStack(null)
+                    .commit();
+        });
+
         updateListView(root);
         return root;
     }

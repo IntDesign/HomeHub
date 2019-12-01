@@ -35,7 +35,7 @@ public class HouseSearchRequest extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         context.runOnUiThread(() -> Toast.makeText(context.getBaseContext(), "Start Fetching Data", Toast.LENGTH_SHORT).show());
-        HouseRepository.getInstance().fetchData(100, 0, "Id", OrderType.ASC);
+        HouseRepository.getInstance().fetchData(100, 0, "Id", OrderType.ASC, null);
         try {
             Thread.sleep(300);
         } catch (InterruptedException e) {

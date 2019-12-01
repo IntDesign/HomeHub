@@ -13,4 +13,9 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="address">Address</string>
+    <string name="full_name">Full Name</string>
+    <string name="email">Email</string>
+    <string name="save_house">Save House</string>
 </resources>
