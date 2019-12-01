@@ -1,0 +1,81 @@
+mutation AddHouse($house: HouseCreateViewModel!){
+    house:house{
+        addHouse(house:$house){
+            id
+        }
+    }
+}
+mutation UpdateHouse($id: String!){
+    house:house{
+        removeHouse(id:$id){
+            id
+        }
+    }
+}
+
+mutation AddRoom($room:RoomCreateViewModel!){
+    room:room{
+        addRoom(room:$room){
+            id
+        }
+    }
+}
+mutation UpdateRoom($rid : String!){
+    room:room{
+        updateRoomValues:updateRoomValues(roomId:$rid){
+            id
+        }
+    }
+}
+
+mutation AddWallObject($door:RoomWallObjectCreateViewModel!){
+    wallObject:wallObject{
+        addWallObject(wallObject:$door){
+            id,
+            area
+        }
+    }
+}
+
+mutation AddWallObject2($window:RoomWallObjectCreateViewModel!){
+    wallObject:wallObject{
+        addWallObject(wallObject:$window){
+            id,
+            area
+        }
+    }
+}
+
+mutation AddRoomJob($job: RoomJobCreateViewModel!){
+    roomJob:roomJob{
+        addJob(job:$job){
+            id,
+            startDate,
+            finishDate
+        }
+    }
+}
+
+mutation AddMaterial($material:MaterialCreateViewModel!){
+    material:material{
+        addMaterial(material:$material){
+            id
+        }
+    }
+}
+
+mutation AddMaterialInfo($info:MaterialInformationCreateViewModel!){
+    materialInfo:materialInfo{
+        addMaterialInfo(materialInfo:$info){
+            id
+        }
+    }
+}
+
+mutation AddExpenditure($expenditure:MaterialExpenditureCreateViewModel!){
+    expenditures:expenditures{
+        addExpenditure(materialExpenditure:$expenditure){
+            id
+        }
+    }
+}

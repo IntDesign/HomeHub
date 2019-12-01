@@ -1,0 +1,117 @@
+query searchHouses($pagination: PagedRequestType!, $ordering: OrderedRequestType!, $filter: HouseFilteredRequestType) {
+    house {
+        search(pagination: $pagination, ordering: $ordering, filter: $filter) {
+            items {
+                id,
+                houseAddress,
+                ownerName,
+                ownerEmail,
+                ownerPhone
+            }
+        }
+    }
+}
+
+query searchRooms($pagination: PagedRequestType!, $ordering: OrderedRequestType!, $filter: RoomFilteredRequestType) {
+    room {
+        search(pagination: $pagination, ordering: $ordering, filter: $filter) {
+            items {
+                id,
+                houseId,
+                afm,
+                asp,
+                atv,
+                customHeightOne,
+                customHeightTwo,
+                customLenght,
+                customWidth,
+                emptyAsp,
+                height,
+                lenght,
+                pc,
+                specialAfm,
+                specialTilesParquetCoefficient,
+                tilesParquetCoefficient,
+                type,
+                wallRealCoefficient,
+                width
+            }
+        }
+    }
+}
+
+query searchRoomJobs($pagination: PagedRequestType!, $ordering: OrderedRequestType!, $filter: RoomJobFilteredRequestType) {
+    roomJob {
+        search(pagination: $pagination, ordering: $ordering, filter: $filter) {
+            items {
+                id,
+                area,
+                lenght,
+                number,
+                roomId,
+                wallObjectType,
+                width
+            }
+        }
+    }
+}
+
+query searchWallObjects($pagination: PagedRequestType!, $ordering: OrderedRequestType!, $filter: RoomWallObjectFilteredRequestType) {
+    wallObject {
+        search(pagination: $pagination, ordering: $ordering, filter: $filter) {
+            items {
+                id,
+                area,
+                lenght,
+                number,
+                roomId,
+                wallObjectType,
+                width
+            }
+        }
+    }
+}
+
+query searchMaterialExpenditures($pagination: PagedRequestType!, $ordering: OrderedRequestType!, $filter: MaterialExpenditureFilterRequestType) {
+    expenditures {
+        search(pagination: $pagination, ordering: $ordering, filter: $filter) {
+            items {
+                id,
+                materialInformationId,
+                totalPackets,
+                totalPrice,
+                totalQuantity
+            }
+        }
+    }
+}
+
+query searchMaterial($pagination: PagedRequestType!, $ordering: OrderedRequestType!, $filter: MaterialFilterRequestType) {
+    material {
+        search(pagination: $pagination, ordering: $ordering, filter: $filter) {
+            items {
+                id,
+                materialName,
+                roomJobId
+            }
+        }
+    }
+}
+
+query searchMaterialInformations($pagination: PagedRequestType!, $ordering: OrderedRequestType!, $filter: MaterialInformationFilterRequestType) {
+    materialInfo {
+        search(pagination: $pagination, ordering: $ordering, filter: $filter) {
+            items {
+                id,
+                appliedLayers,
+                consumptionX,
+                consumptionZ,
+                materialId,
+                pricePerUnit,
+                productQuantity,
+                providerId,
+                unitCover
+            }
+        }
+    }
+}
