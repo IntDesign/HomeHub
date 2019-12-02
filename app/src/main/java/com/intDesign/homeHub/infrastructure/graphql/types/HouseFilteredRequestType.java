@@ -14,141 +14,151 @@ import com.apollographql.apollo.api.internal.Utils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 public final class HouseFilteredRequestType implements InputType {
-    private final Input<String> searchTerm;
+  private final Input<String> searchTerm;
 
-    private final Input<List<String>> ids;
+  private final Input<List<String>> ids;
 
-    private final Input<List<String>> names;
+  private final Input<List<String>> names;
 
-    private transient volatile int $hashCode;
+  private transient volatile int $hashCode;
 
-    private transient volatile boolean $hashCodeMemoized;
+  private transient volatile boolean $hashCodeMemoized;
 
-    HouseFilteredRequestType(Input<String> searchTerm, Input<List<String>> ids,
-                             Input<List<String>> names) {
-        this.searchTerm = searchTerm;
-        this.ids = ids;
-        this.names = names;
-    }
+  HouseFilteredRequestType(Input<String> searchTerm, Input<List<String>> ids,
+                           Input<List<String>> names) {
+    this.searchTerm = searchTerm;
+    this.ids = ids;
+    this.names = names;
+  }
 
-    public @Nullable
-    String searchTerm() {
-        return this.searchTerm.value;
-    }
+  public @Nullable
+  String searchTerm() {
+    return this.searchTerm.value;
+  }
 
-    public @Nullable
-    List<String> ids() {
-        return this.ids.value;
-    }
+  public @Nullable
+  List<String> ids() {
+    return this.ids.value;
+  }
 
-    public @Nullable
-    List<String> names() {
-        return this.names.value;
-    }
+  public @Nullable
+  List<String> names() {
+    return this.names.value;
+  }
 
-    public static Builder builder() {
-        return new Builder();
-    }
+  public static Builder builder() {
+    return new Builder();
+  }
 
-    @Override
-    public InputFieldMarshaller marshaller() {
-        return writer -> {
-            if (searchTerm.defined) {
-                writer.writeString("searchTerm", searchTerm.value);
+  @Override
+  public InputFieldMarshaller marshaller() {
+    return new InputFieldMarshaller() {
+      @Override
+      public void marshal(InputFieldWriter writer) throws IOException {
+        if (searchTerm.defined) {
+          writer.writeString("searchTerm", searchTerm.value);
+        }
+        if (ids.defined) {
+          writer.writeList("ids", ids.value != null ? new InputFieldWriter.ListWriter() {
+            @Override
+            public void write(InputFieldWriter.ListItemWriter listItemWriter) throws IOException {
+              for (final String $item : ids.value) {
+                listItemWriter.writeString($item);
+              }
             }
-            if (ids.defined) {
-                writer.writeList("ids", ids.value != null ? (InputFieldWriter.ListWriter) listItemWriter -> {
-                    for (final String $item : ids.value) {
-                        listItemWriter.writeString($item);
-                    }
-                } : null);
+          } : null);
+        }
+        if (names.defined) {
+          writer.writeList("names", names.value != null ? new InputFieldWriter.ListWriter() {
+            @Override
+            public void write(InputFieldWriter.ListItemWriter listItemWriter) throws IOException {
+              for (final String $item : names.value) {
+                listItemWriter.writeString($item);
+              }
             }
-            if (names.defined) {
-                writer.writeList("names", names.value != null ? (InputFieldWriter.ListWriter) listItemWriter -> {
-                    for (final String $item : names.value) {
-                        listItemWriter.writeString($item);
-                    }
-                } : null);
-            }
-        };
+          } : null);
+        }
+      }
+    };
+  }
+
+  @Override
+  public int hashCode() {
+    if (!$hashCodeMemoized) {
+      int h = 1;
+      h *= 1000003;
+      h ^= searchTerm.hashCode();
+      h *= 1000003;
+      h ^= ids.hashCode();
+      h *= 1000003;
+      h ^= names.hashCode();
+      $hashCode = h;
+      $hashCodeMemoized = true;
+    }
+    return $hashCode;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    }
+    if (o instanceof HouseFilteredRequestType) {
+      HouseFilteredRequestType that = (HouseFilteredRequestType) o;
+      return this.searchTerm.equals(that.searchTerm)
+              && this.ids.equals(that.ids)
+              && this.names.equals(that.names);
+    }
+    return false;
+  }
+
+  public static final class Builder {
+    private Input<String> searchTerm = Input.fromNullable("null");
+
+    private Input<List<String>> ids = Input.fromNullable(Arrays.<String>asList("null"));
+
+    private Input<List<String>> names = Input.fromNullable(Arrays.<String>asList("null"));
+
+    Builder() {
     }
 
-    @Override
-    public int hashCode() {
-        if (!$hashCodeMemoized) {
-            int h = 1;
-            h *= 1000003;
-            h ^= searchTerm.hashCode();
-            h *= 1000003;
-            h ^= ids.hashCode();
-            h *= 1000003;
-            h ^= names.hashCode();
-            $hashCode = h;
-            $hashCodeMemoized = true;
-        }
-        return $hashCode;
+    public Builder searchTerm(@Nullable String searchTerm) {
+      this.searchTerm = Input.fromNullable(searchTerm);
+      return this;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (o instanceof HouseFilteredRequestType) {
-            HouseFilteredRequestType that = (HouseFilteredRequestType) o;
-            return this.searchTerm.equals(that.searchTerm)
-                    && this.ids.equals(that.ids)
-                    && this.names.equals(that.names);
-        }
-        return false;
+    public Builder ids(@Nullable List<String> ids) {
+      this.ids = Input.fromNullable(ids);
+      return this;
     }
 
-    public static final class Builder {
-        private Input<String> searchTerm = Input.fromNullable("null");
-
-        private Input<List<String>> ids = Input.fromNullable(Arrays.asList("null"));
-
-        private Input<List<String>> names = Input.fromNullable(Arrays.asList("null"));
-
-        Builder() {
-        }
-
-        public Builder searchTerm(@Nullable String searchTerm) {
-            this.searchTerm = Input.fromNullable(searchTerm);
-            return this;
-        }
-
-        public Builder ids(@Nullable List<String> ids) {
-            this.ids = Input.fromNullable(ids);
-            return this;
-        }
-
-        public Builder names(@Nullable List<String> names) {
-            this.names = Input.fromNullable(names);
-            return this;
-        }
-
-        public Builder searchTermInput(@NotNull Input<String> searchTerm) {
-            this.searchTerm = Utils.checkNotNull(searchTerm, "searchTerm == null");
-            return this;
-        }
-
-        public Builder idsInput(@NotNull Input<List<String>> ids) {
-            this.ids = Utils.checkNotNull(ids, "ids == null");
-            return this;
-        }
-
-        public Builder namesInput(@NotNull Input<List<String>> names) {
-            this.names = Utils.checkNotNull(names, "names == null");
-            return this;
-        }
-
-        public HouseFilteredRequestType build() {
-            return new HouseFilteredRequestType(searchTerm, ids, names);
-        }
+    public Builder names(@Nullable List<String> names) {
+      this.names = Input.fromNullable(names);
+      return this;
     }
+
+    public Builder searchTermInput(@NotNull Input<String> searchTerm) {
+      this.searchTerm = Utils.checkNotNull(searchTerm, "searchTerm == null");
+      return this;
+    }
+
+    public Builder idsInput(@NotNull Input<List<String>> ids) {
+      this.ids = Utils.checkNotNull(ids, "ids == null");
+      return this;
+    }
+
+    public Builder namesInput(@NotNull Input<List<String>> names) {
+      this.names = Utils.checkNotNull(names, "names == null");
+      return this;
+    }
+
+    public HouseFilteredRequestType build() {
+      return new HouseFilteredRequestType(searchTerm, ids, names);
+    }
+  }
 }

@@ -8,26 +8,15 @@ package com.intDesign.homeHub.infrastructure.graphql.types;
 import com.apollographql.apollo.api.ScalarType;
 
 public enum CustomType implements ScalarType {
-    ID {
-        @Override
-        public String typeName() {
-            return "ID";
-        }
-
-        @Override
-        public Class javaType() {
-            return String.class;
-        }
-    },
-    DATETIME {
-        @Override
-        public String typeName() {
-            return "DATETIME";
-        }
-
-        @Override
-        public Class javaType() {
-            return String.class;
-        }
+  ID {
+    @Override
+    public String typeName() {
+      return "ID";
     }
+
+    @Override
+    public Class javaType() {
+      return String.class;
+    }
+  }
 }

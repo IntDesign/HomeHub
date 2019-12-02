@@ -7,118 +7,124 @@ package com.intDesign.homeHub.infrastructure.graphql.types;
 
 import com.apollographql.apollo.api.Input;
 import com.apollographql.apollo.api.InputFieldMarshaller;
+import com.apollographql.apollo.api.InputFieldWriter;
 import com.apollographql.apollo.api.InputType;
 import com.apollographql.apollo.api.internal.Utils;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.IOException;
+
 public final class OrderedRequestType implements InputType {
-    private final Input<String> orderBy;
+  private final Input<String> orderBy;
 
-    private final Input<OrderType> orderDirection;
+  private final Input<OrderType> orderDirection;
 
-    private transient volatile int $hashCode;
+  private transient volatile int $hashCode;
 
-    private transient volatile boolean $hashCodeMemoized;
+  private transient volatile boolean $hashCodeMemoized;
 
-    OrderedRequestType(Input<String> orderBy, Input<OrderType> orderDirection) {
-        this.orderBy = orderBy;
-        this.orderDirection = orderDirection;
+  OrderedRequestType(Input<String> orderBy, Input<OrderType> orderDirection) {
+    this.orderBy = orderBy;
+    this.orderDirection = orderDirection;
+  }
+
+  /**
+   * Name of the Property to sort by
+   */
+  public @Nullable
+  String orderBy() {
+    return this.orderBy.value;
+  }
+
+  public @Nullable
+  OrderType orderDirection() {
+    return this.orderDirection.value;
+  }
+
+  public static Builder builder() {
+    return new Builder();
+  }
+
+  @Override
+  public InputFieldMarshaller marshaller() {
+    return new InputFieldMarshaller() {
+      @Override
+      public void marshal(InputFieldWriter writer) throws IOException {
+        if (orderBy.defined) {
+          writer.writeString("orderBy", orderBy.value);
+        }
+        if (orderDirection.defined) {
+          writer.writeString("orderDirection", orderDirection.value != null ? orderDirection.value.rawValue() : null);
+        }
+      }
+    };
+  }
+
+  @Override
+  public int hashCode() {
+    if (!$hashCodeMemoized) {
+      int h = 1;
+      h *= 1000003;
+      h ^= orderBy.hashCode();
+      h *= 1000003;
+      h ^= orderDirection.hashCode();
+      $hashCode = h;
+      $hashCodeMemoized = true;
+    }
+    return $hashCode;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    }
+    if (o instanceof OrderedRequestType) {
+      OrderedRequestType that = (OrderedRequestType) o;
+      return this.orderBy.equals(that.orderBy)
+              && this.orderDirection.equals(that.orderDirection);
+    }
+    return false;
+  }
+
+  public static final class Builder {
+    private Input<String> orderBy = Input.fromNullable("null");
+
+    private Input<OrderType> orderDirection = Input.fromNullable(OrderType.safeValueOf("null"));
+
+    Builder() {
     }
 
     /**
      * Name of the Property to sort by
      */
-    public @Nullable
-    String orderBy() {
-        return this.orderBy.value;
+    public Builder orderBy(@Nullable String orderBy) {
+      this.orderBy = Input.fromNullable(orderBy);
+      return this;
     }
 
-    public @Nullable
-    OrderType orderDirection() {
-        return this.orderDirection.value;
+    public Builder orderDirection(@Nullable OrderType orderDirection) {
+      this.orderDirection = Input.fromNullable(orderDirection);
+      return this;
     }
 
-    public static Builder builder() {
-        return new Builder();
+    /**
+     * Name of the Property to sort by
+     */
+    public Builder orderByInput(@NotNull Input<String> orderBy) {
+      this.orderBy = Utils.checkNotNull(orderBy, "orderBy == null");
+      return this;
     }
 
-    @Override
-    public InputFieldMarshaller marshaller() {
-        return writer -> {
-            if (orderBy.defined) {
-                writer.writeString("orderBy", orderBy.value);
-            }
-            if (orderDirection.defined) {
-                writer.writeString("orderDirection", orderDirection.value != null ? orderDirection.value.rawValue() : null);
-            }
-        };
+    public Builder orderDirectionInput(@NotNull Input<OrderType> orderDirection) {
+      this.orderDirection = Utils.checkNotNull(orderDirection, "orderDirection == null");
+      return this;
     }
 
-    @Override
-    public int hashCode() {
-        if (!$hashCodeMemoized) {
-            int h = 1;
-            h *= 1000003;
-            h ^= orderBy.hashCode();
-            h *= 1000003;
-            h ^= orderDirection.hashCode();
-            $hashCode = h;
-            $hashCodeMemoized = true;
-        }
-        return $hashCode;
+    public OrderedRequestType build() {
+      return new OrderedRequestType(orderBy, orderDirection);
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (o instanceof OrderedRequestType) {
-            OrderedRequestType that = (OrderedRequestType) o;
-            return this.orderBy.equals(that.orderBy)
-                    && this.orderDirection.equals(that.orderDirection);
-        }
-        return false;
-    }
-
-    public static final class Builder {
-        private Input<String> orderBy = Input.fromNullable("null");
-
-        private Input<OrderType> orderDirection = Input.fromNullable(OrderType.safeValueOf("null"));
-
-        Builder() {
-        }
-
-        /**
-         * Name of the Property to sort by
-         */
-        public Builder orderBy(@Nullable String orderBy) {
-            this.orderBy = Input.fromNullable(orderBy);
-            return this;
-        }
-
-        public Builder orderDirection(@Nullable OrderType orderDirection) {
-            this.orderDirection = Input.fromNullable(orderDirection);
-            return this;
-        }
-
-        /**
-         * Name of the Property to sort by
-         */
-        public Builder orderByInput(@NotNull Input<String> orderBy) {
-            this.orderBy = Utils.checkNotNull(orderBy, "orderBy == null");
-            return this;
-        }
-
-        public Builder orderDirectionInput(@NotNull Input<OrderType> orderDirection) {
-            this.orderDirection = Utils.checkNotNull(orderDirection, "orderDirection == null");
-            return this;
-        }
-
-        public OrderedRequestType build() {
-            return new OrderedRequestType(orderBy, orderDirection);
-        }
-    }
+  }
 }

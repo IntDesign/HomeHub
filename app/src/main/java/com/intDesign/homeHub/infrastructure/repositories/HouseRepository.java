@@ -19,7 +19,6 @@ import com.intDesign.homeHub.infrastructure.graphql.types.PagedRequestType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,8 +41,9 @@ public class HouseRepository {
         return data;
     }
 
-    public void fetchData(int take, int offset, String orderBy, OrderType orderType, String searchTerm) {
-        temporaryData = sendSearchHouseRequest(take, offset, orderBy, orderType, searchTerm);
+    public void fetchData(int take, int offset, String orderBy, OrderType orderType,
+                          String searchTerm, List<String> ids, List<String> names) {
+        temporaryData = sendSearchHouseRequest(take, offset, orderBy, orderType, searchTerm, ids, names);
     }
 
     public void saveHouse(House house) {
@@ -53,8 +53,9 @@ public class HouseRepository {
                         ownerEmail(house.getOwnerEmail()).
                         ownerName(house.getOwnerName()).
                         ownerPhone(house.getOwnerEmail()).
-                        build()).build())
-                .enqueue(new ApolloCall.Callback<AddHouseMutation.Data>() {
+                        build()).
+                        build()).
+                enqueue(new ApolloCall.Callback<AddHouseMutation.Data>() {
                     @Override
                     public void onResponse(@NotNull Response<AddHouseMutation.Data> response) {
 
@@ -67,24 +68,20 @@ public class HouseRepository {
                 });
     }
 
-    private ArrayList<House> sendSearchHouseRequest(int take, int offset, String orderBy, OrderType orderType, String searchTerm) {
+    private ArrayList<House> sendSearchHouseRequest(int take, int offset, String orderBy, OrderType orderType,
+                                                    String searchTerm, List<String> ids, List<String> names) {
         final ArrayList<House> houses = new ArrayList<>();
         GraphQlClient.getClient().query(SearchHousesQuery.builder()
                 .pagination(PagedRequestType.builder().take(take).offset(offset).build())
                 .ordering(OrderedRequestType.builder().orderBy(orderBy).orderDirection(orderType).build())
-                .filter(HouseFilteredRequestType.builder().ids(new LinkedList<>()).names(new LinkedList<>()).searchTerm(searchTerm).build())
+                .filter(HouseFilteredRequestType.builder().ids(ids).names(names).searchTerm(searchTerm).build())
                 .build()).enqueue(new ApolloCall.Callback<SearchHousesQuery.Data>() {
             @Override
             public void onResponse(@NotNull final Response<SearchHousesQuery.Data> response) {
                 try {
                     List<SearchHousesQuery.Item> items = response.data().house().search().items();
                     for (SearchHousesQuery.Item item : items) {
-                        House house = new House();
-                        house.setId(UUID.fromString(item.id()));
-                        house.setHouseAddress(item.houseAddress());
-                        house.setOwnerEmail(item.ownerEmail());
-                        house.setOwnerName(item.ownerName());
-                        house.setOwnerPhone(item.ownerPhone());
+                        House house = setHouseFromItem(item);
                         houses.add(house);
                     }
                 } catch (Exception ex) {
@@ -98,5 +95,16 @@ public class HouseRepository {
             }
         });
         return houses;
+    }
+
+    private House setHouseFromItem(SearchHousesQuery.Item item) {
+        House house = new House();
+        house.setId(UUID.fromString(item.id()));
+        house.setHouseAddress(item.houseAddress());
+        house.setOwnerEmail(item.ownerEmail());
+        house.setOwnerName(item.ownerName());
+        house.setOwnerPhone(item.ownerPhone());
+        house.setUserId(item.userId());
+        return house;
     }
 }

@@ -11,6 +11,7 @@ public class House extends Identifier {
     private String ownerName;
     private String ownerPhone;
     private String ownerEmail;
+    private String userId;
     private List<Room> HouseRooms;
 
     public String getHouseAddress() {
@@ -51,5 +52,13 @@ public class House extends Identifier {
 
     public void setHouseRooms(List<Room> houseRooms) {
         HouseRooms = houseRooms;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

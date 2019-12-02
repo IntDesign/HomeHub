@@ -6,31 +6,31 @@
 package com.intDesign.homeHub.infrastructure.graphql.types;
 
 public enum OrderType {
-    ASC("ASC"),
+  ASC("ASC"),
 
-    DESC("DESC"),
+  DESC("DESC"),
 
-    /**
-     * Auto generated constant for unknown enum values
-     */
-    $UNKNOWN("$UNKNOWN");
+  /**
+   * Auto generated constant for unknown enum values
+   */
+  $UNKNOWN("$UNKNOWN");
 
-    private final String rawValue;
+  private final String rawValue;
 
-    OrderType(String rawValue) {
-        this.rawValue = rawValue;
+  OrderType(String rawValue) {
+    this.rawValue = rawValue;
+  }
+
+  public String rawValue() {
+    return rawValue;
+  }
+
+  public static OrderType safeValueOf(String rawValue) {
+    for (OrderType enumValue : values()) {
+      if (enumValue.rawValue.equals(rawValue)) {
+        return enumValue;
+      }
     }
-
-    public String rawValue() {
-        return rawValue;
-    }
-
-    public static OrderType safeValueOf(String rawValue) {
-        for (OrderType enumValue : values()) {
-            if (enumValue.rawValue.equals(rawValue)) {
-                return enumValue;
-            }
-        }
-        return OrderType.$UNKNOWN;
-    }
+    return OrderType.$UNKNOWN;
+  }
 }
