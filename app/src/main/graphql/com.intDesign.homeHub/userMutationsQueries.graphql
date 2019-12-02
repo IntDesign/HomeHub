@@ -1,0 +1,45 @@
+query searchHouses($pagination: PagedRequestType!, $ordering: OrderedRequestType!, $filter: HouseFilteredRequestType) {
+    house {
+        search(pagination: $pagination, ordering: $ordering, filter: $filter) {
+            items {
+                id
+                houseAddress
+                ownerName
+                ownerEmail
+                ownerPhone
+                userId
+            }
+        }
+    }
+}
+
+mutation loginRequest($request: LoginCreateViewModel!) {
+    login {
+        sendLogin(request: $request) {
+            isSuccessful
+            userId
+            error
+        }
+    }
+}
+
+query searchUsers($pagination: PagedRequestType!, $ordering: OrderedRequestType!, $filter: UserFilteredRequestType) {
+    users {
+        search(pagination: $pagination, ordering: $ordering, filter: $filter) {
+            items {
+                id
+                username
+                email
+                isWorker
+            }
+        }
+    }
+}
+
+mutation addUser($user: UserCreateViewModel!){
+    users{
+        addUser(user: $user){
+            id
+        }
+    }
+}
