@@ -28,7 +28,7 @@ public class RegisterTask extends AsyncTask<Void, Void, Void> {
     protected Void doInBackground(Void... voids) {
         UserRepository.getInstance().addUser(usernameValue, emailValue, passwordValue);
         try {
-            Thread.sleep(300);
+            Thread.sleep(200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -36,6 +36,11 @@ public class RegisterTask extends AsyncTask<Void, Void, Void> {
     }
 
     protected void onPostExecute(Void aVoid) {
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         if (UserRepository.getInstance().getRegisterResponse().getValue()) {
             context.runOnUiThread(() -> {
                 Intent intent = new Intent(context, LoginActivity.class);

@@ -31,11 +31,10 @@ public class RegisterActivity extends AppCompatActivity {
 
             if (!passwordValue.equals(confirmValue)) {
                 Toast.makeText(this, "Password does not match with Confirm Password", Toast.LENGTH_LONG).show();
-            }
-            if (passwordValue.isEmpty() || confirmValue.isEmpty() || emailValue.isEmpty() || usernameValue.isEmpty()) {
+            } else if (passwordValue.isEmpty() || confirmValue.isEmpty() || emailValue.isEmpty() || usernameValue.isEmpty()) {
                 Toast.makeText(this, "Make sure you completed all the fields", Toast.LENGTH_LONG).show();
-            }
-            runOnUiThread(() -> new RegisterTask(this, passwordValue, emailValue, usernameValue).execute());
+            } else
+                runOnUiThread(() -> new RegisterTask(this, passwordValue, emailValue, usernameValue).execute());
 
         });
 
