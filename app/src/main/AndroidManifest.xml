@@ -17,7 +17,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
         tools:targetApi="m">
         <activity
-            android:name="com.intDesign.homeHub.presentation.MainActivity"
+            android:name="com.intDesign.homeHub.presentation.ui.login.LoginActivity"
             android:label="HouseHub"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -26,6 +26,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".presentation.MainActivity"
+            android:label="HouseHub"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>

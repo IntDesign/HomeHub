@@ -21,7 +21,7 @@
         app:srcCompat="@mipmap/logo" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/loginButtonId"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="260dp"
         android:layout_height="46dp"
@@ -33,11 +33,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextBoxId"
         app:layout_constraintVertical_bias="0.015" />
 
     <Button
-        android:id="@+id/login2"
+        android:id="@+id/registerButtonId"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="260dp"
         android:layout_height="46dp"
@@ -48,29 +48,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login"
+        app:layout_constraintTop_toBottomOf="@+id/loginButtonId"
         app:layout_constraintVertical_bias="0.066" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/passwordTextBoxId"
         android:layout_width="260dp"
         android:layout_height="46dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/usernameTextBoxId"
         app:layout_constraintVertical_bias="0.072" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/usernameTextBoxId"
         android:layout_width="260dp"
         android:layout_height="46dp"
         android:ems="10"
-        android:hint="Username/Email"
+        android:hint="@string/username_email"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -83,10 +83,10 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="By continuing you accept our \n           Terms Of Service"
+        android:text="@string/terms_of_service"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login2" />
+        app:layout_constraintTop_toBottomOf="@+id/registerButtonId" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
