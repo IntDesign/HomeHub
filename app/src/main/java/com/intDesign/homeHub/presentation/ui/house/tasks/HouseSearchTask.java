@@ -14,16 +14,33 @@ import com.intDesign.homeHub.infrastructure.repositories.HouseRepository;
 import com.intDesign.homeHub.presentation.ui.house.HouseListAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @SuppressLint("StaticFieldLeak")
-public class HouseSearchRequest extends AsyncTask<Void, Void, Void> {
+public class HouseSearchTask extends AsyncTask<Void, Void, Void> {
     private ArrayList<House> value;
     private Activity context;
     private ArrayAdapter<House> adapter;
+    int take;
+    int offset;
+    String orderBy;
+    OrderType orderType;
+    String searchTerm;
+    List<String> ids;
+    List<String> names;
 
-    public HouseSearchRequest(FragmentActivity context, HouseListAdapter adapter) {
+    public HouseSearchTask(FragmentActivity context, HouseListAdapter adapter,
+                           int take, int offset, String orderBy, OrderType orderType,
+                           String searchTerm, List<String> ids, List<String> names) {
         this.context = context;
         this.adapter = adapter;
+        this.take = take;
+        this.offset = offset;
+        this.orderBy = orderBy;
+        this.orderType = orderType;
+        this.searchTerm = searchTerm;
+        this.ids = ids;
+        this.names = names;
     }
 
     @Override
@@ -35,7 +52,7 @@ public class HouseSearchRequest extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         context.runOnUiThread(() -> Toast.makeText(context.getBaseContext(), "Start Fetching Data", Toast.LENGTH_SHORT).show());
-        HouseRepository.getInstance().fetchData(100, 0, "Id", OrderType.ASC, null);
+        HouseRepository.getInstance().fetchData(take, offset, orderBy, orderType, searchTerm, ids, names);
         try {
             Thread.sleep(300);
         } catch (InterruptedException e) {

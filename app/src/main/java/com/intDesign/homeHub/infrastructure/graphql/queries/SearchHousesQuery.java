@@ -36,7 +36,7 @@ public final class SearchHousesQuery implements Query<SearchHousesQuery.Data, Se
   public static final String OPERATION_ID = "1f1cc8f971103a0aacf4e43ca4bc266af97d400f9a34e10308f30f847b5393ed";
 
   public static final String QUERY_DOCUMENT = QueryDocumentMinifier.minify(
-          "query searchHouses($pagination: PagedRequestType!, $ordering: OrderedRequestType!, $filter: HouseFilteredRequestType) {\n"
+          "query getResponse($pagination: PagedRequestType!, $ordering: OrderedRequestType!, $filter: HouseFilteredRequestType) {\n"
                   + "  house {\n"
                   + "    __typename\n"
                   + "    search(pagination: $pagination, ordering: $ordering, filter: $filter) {\n"
@@ -58,7 +58,7 @@ public final class SearchHousesQuery implements Query<SearchHousesQuery.Data, Se
   public static final OperationName OPERATION_NAME = new OperationName() {
     @Override
     public String name() {
-      return "searchHouses";
+        return "getResponse";
     }
   };
 

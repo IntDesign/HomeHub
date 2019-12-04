@@ -37,7 +37,7 @@
         app:layout_constraintVertical_bias="0.015" />
 
     <Button
-        android:id="@+id/registerButtonId"
+        android:id="@+id/register_button"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="260dp"
         android:layout_height="46dp"
@@ -87,6 +87,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registerButtonId" />
+        app:layout_constraintTop_toBottomOf="@+id/register_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

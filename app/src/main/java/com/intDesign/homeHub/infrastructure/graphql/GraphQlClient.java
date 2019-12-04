@@ -6,7 +6,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 public class GraphQlClient {
-    private static final String serverUrl = "http://192.168.1.102:5000/graphql";
+    private static final String serverUrl = "http://192.168.1.104:5000/graphql";
 
     private static ApolloClient client;
 

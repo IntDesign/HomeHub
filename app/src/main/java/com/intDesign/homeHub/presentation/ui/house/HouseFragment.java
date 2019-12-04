@@ -15,7 +15,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.intDesign.homeHub.R;
-import com.intDesign.homeHub.presentation.ui.house.tasks.HouseSearchRequest;
+import com.intDesign.homeHub.infrastructure.graphql.types.OrderType;
+import com.intDesign.homeHub.presentation.ui.house.tasks.HouseSearchTask;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,9 @@ public class HouseFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         container.removeAllViews();
+
         root = inflater.inflate(R.layout.fragment_house, container, false);
+
         FloatingActionButton floatingActionButton = root.findViewById(R.id.addHouse);
         floatingActionButton.setOnClickListener(v -> {
             AddHouseFragment nextFrag = new AddHouseFragment();
@@ -50,7 +53,8 @@ public class HouseFragment extends Fragment {
         }
         adapter.clear();
         if (isNetwork(getActivity()))
-            new HouseSearchRequest(getActivity(), adapter).execute();
+            new HouseSearchTask(getActivity(), adapter, 100, 0, "Id", OrderType.ASC,
+                    null, null, null).execute();
         else
             Toast.makeText(getActivity(), "No network connection", Toast.LENGTH_LONG).show();
     }

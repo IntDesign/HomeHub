@@ -58,12 +58,10 @@ public class HouseRepository {
                 enqueue(new ApolloCall.Callback<AddHouseMutation.Data>() {
                     @Override
                     public void onResponse(@NotNull Response<AddHouseMutation.Data> response) {
-
                     }
 
                     @Override
                     public void onFailure(@NotNull ApolloException e) {
-
                     }
                 });
     }

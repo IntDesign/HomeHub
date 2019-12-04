@@ -32,6 +32,12 @@
             android:label="HouseHub"
             android:theme="@style/AppTheme.NoActionBar" />
 
+        <activity
+            android:name=".presentation.ui.register.RegisterActivity"
+            android:label="HouseHub"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+
     </application>
 
 </manifest>

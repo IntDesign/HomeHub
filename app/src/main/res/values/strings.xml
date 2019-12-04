@@ -21,4 +21,11 @@
     <string name="terms_of_service">By continuing you accept our   Terms Of Service</string>
     <string name="username_email">Username/Email</string>
     <string name="password">Password</string>
+    <string name="houses">Houses</string>
+    <string name="your_houses">Your Houses</string>
+    <string name="communicate">Communicate</string>
+    <string name="register_now">Register Now</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="your_user_name">Your User Name</string>
+    <string name="your_email_address">Your Email Address</string>
 </resources>
