@@ -45,9 +45,9 @@ public final class AddWallObjectMutation implements Mutation<AddWallObjectMutati
 
     private final AddWallObjectMutation.Variables variables;
 
-    public AddWallObjectMutation(@NotNull RoomWallObjectCreateViewModel door) {
-        Utils.checkNotNull(door, "door == null");
-        variables = new AddWallObjectMutation.Variables(door);
+    public AddWallObjectMutation(@NotNull RoomWallObjectCreateViewModel wallObject) {
+        Utils.checkNotNull(wallObject, "wallObject == null");
+        variables = new AddWallObjectMutation.Variables(wallObject);
     }
 
     @NotNull
